@@ -42,4 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function channels()
+    {
+        return $this->hasMany(Channels::class);
+    }
+
+    public function userChannels()
+    {
+        return $this->hasMany(UserChannels::class);
+    }
 }
