@@ -32,7 +32,7 @@ class Channels extends Model
 
     public function category()
     {
-        return $this->belongsToMany(Categories::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function userChannels()

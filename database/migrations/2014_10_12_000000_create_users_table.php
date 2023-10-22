@@ -17,10 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('username')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('token')->nullable();
             $table->string('status')->default('ACTIVE');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

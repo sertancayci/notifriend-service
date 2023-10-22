@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Categories;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -27,7 +27,7 @@ class CategorySeeder extends Seeder
 
         // Insert the categories into the database
         foreach ($categories as $category) {
-            Categories::create([
+            Category::create([
                 'name' => $category['name'],
                 'slug' => $category['slug'],
                 'status' => $category['status'],
