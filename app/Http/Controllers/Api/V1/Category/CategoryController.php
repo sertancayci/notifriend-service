@@ -16,7 +16,7 @@ class CategoryController extends BaseController
         return new CategoryCollection(Category::paginate());
     }
 
-    public function show(Category $category)
+    public function get(Category $category)
     {
         return new CategoryResource($category);
     }

@@ -14,6 +14,7 @@ class CategoryCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
+        //TODO: bu işlem php8 de nasıl yapılıyor?
         return parent::toArray($request);
     }
 }

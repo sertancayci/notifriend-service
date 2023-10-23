@@ -15,6 +15,8 @@ class Category extends Model
         "PASSIVE" => "Pasif",
     ];
 
+    //TODO: add fillable
+
     public function channels()
     {
         return $this->hasMany(Channels::class);

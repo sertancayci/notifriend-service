@@ -24,4 +24,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function () { // Fixed the namespace
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('channels', ChannelsController::class);
+
+    Route::prefix('user')->controller(\App\Http\Controllers\Api\V1\User\UserController::class)->group(function () {
+        Route::get('list', 'list');
+        Route::get('{user}', 'get');
+        Route::post('create', 'create');
+        Route::post('{user}/update', 'update');
+        Route::delete('{user}/delete', 'delete');
+    });
 });
