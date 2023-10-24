@@ -15,18 +15,10 @@ class AuthController extends BaseController
      */
     public function register(RegisterRequest $request): JsonResponse
     {
+
         $user = User::create($request->all());
-//        $user->assignRole('student');
+//        $user->assignRole('user');
 
-        if ($user) {
-            $token = rand(100000, 999999);
-
-            $user->verify()->create([
-                'user_id' => $user->id,
-                'token' => $token,
-            ]);
-
-        }
 
         return $this->sendResponse($user, 'Kullanıcı başarıyla kaydoldu.');
     }

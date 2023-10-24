@@ -27,6 +27,7 @@ class RegisterRequest extends FormRequest
             'username' => 'required|string|max:255',
             'password' => 'required|string|min:8',
             're_password' => 'required|same:password',
+            'token' => 'nullable|string|max:255',
         ];
     }
 }

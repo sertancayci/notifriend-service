@@ -16,6 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::group(['prefix' => 'v1',
+    'namespace' => 'App\Http\Controllers\Api\V1'], function () {
+
+    Route::prefix('auth')->group(function () {
+        Route::post('register', ['uses' => 'Auth\AuthController@register']);
+//        Route::post('login', ['uses' => 'Auth\AuthController@login']);
+    });
+
+
+});
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
