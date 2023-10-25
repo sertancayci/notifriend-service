@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Http\Requests\V1\Auth\LoginRequest;
 use App\Http\Requests\V1\Auth\RegisterRequest;
 use App\Http\Resources\V1\Auth\LoginResource;
 use App\Models\User;
@@ -25,11 +26,10 @@ class AuthController extends BaseController
         return $this->sendResponse($user, 'Kullanıcı başarıyla kaydoldu.');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        
-        $credentials = request(['email', 'password']);
-        if (!Auth::attempt($credentials)) {
+
+        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             //if credentials is not true
             return $this->sendError('Kullanıcı adı veya şifre yanlış', ['error' => 'Unauthorized']);
             //return error
@@ -43,7 +43,7 @@ class AuthController extends BaseController
             return $this->sendError('Hesabınız pasif durumdadır.');
         }
 
-        $user->token = $user->createToken('Personal Access Token');
+        $user->token = $user->createToken('Personal Access Token')->plainTextToken;
 //        $token = $tokenResult->token;
         //save token
 

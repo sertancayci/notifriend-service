@@ -22,7 +22,7 @@ Route::group(['prefix' => 'v1',
 
     Route::prefix('auth')->group(function () {
         Route::post('register', ['uses' => 'Auth\AuthController@register']);
-//        Route::post('login', ['uses' => 'Auth\AuthController@login']);
+        Route::post('login', ['uses' => 'Auth\AuthController@login']);
     });
 
 
@@ -34,7 +34,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // api/v1
-Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function () { // Fixed the namespace
+Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1',
+    'middleware' => ['auth:sanctum']], function () {
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('channels', ChannelsController::class);
 
