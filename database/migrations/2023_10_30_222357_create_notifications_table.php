@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('sender_user_id');
             $table->unsignedBigInteger('receiver_user_id');
-            $table->unsignedBigInteger('channel_id');
             $table->unsignedBigInteger('message_id');
             $table->boolean('is_sent');
             $table->boolean('is_read')->default(false);
@@ -23,7 +22,6 @@ return new class extends Migration {
 
             $table->foreign('sender_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('receiver_user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
             $table->foreign('message_id')->references('id')->on('notification_message')->onDelete('cascade');
         });
     }

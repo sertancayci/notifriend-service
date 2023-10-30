@@ -15,6 +15,8 @@ class NotificationMessage extends Model
     use Filterable;
     use Sortable;
 
+    protected $table = 'notification_message';
+
     protected $fillable = [
         'sender_user_id',
         'channel_id',
@@ -27,6 +29,15 @@ class NotificationMessage extends Model
     {
         return $this->belongsToMany(User::class);
     }
-    
+
+    public function channel()
+    {
+        return $this->belongsToMany(Channels::class);
+    }
+
+    public function notification()
+    {
+        return $this->hasMany(Notification::class);
+    }
 
 }
