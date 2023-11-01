@@ -46,4 +46,11 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1',
         Route::post('{user}/update', 'update');
         Route::delete('{user}/delete', 'delete');
     });
+
+    Route::prefix('notification')->controller(\App\Http\Controllers\Api\V1\Notifications\NotificationController::class)->group(function () {
+        Route::get('list', 'list');
+        Route::get('{notification}', 'get');
+        Route::post('create', 'create');
+        Route::delete('{notification}/delete', 'delete');
+    });
 });
