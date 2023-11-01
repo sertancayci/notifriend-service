@@ -30,4 +30,14 @@ class RegisterRequest extends FormRequest
             'token' => 'nullable|string|max:255',
         ];
     }
+
+    public function data()
+    {
+        return [
+            'name' => request()->name,
+            'email' => request()->email,
+            'password' => bcrypt(request()->password),
+
+        ];
+    }
 }
