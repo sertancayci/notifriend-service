@@ -49,8 +49,17 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1',
 
     Route::prefix('notification')->controller(\App\Http\Controllers\Api\V1\Notifications\NotificationController::class)->group(function () {
         Route::get('list', 'list');
+        Route::get('userNotifications', 'userNotifications');
         Route::get('{notification}', 'get');
         Route::post('create', 'create');
         Route::delete('{notification}/delete', 'delete');
+        // Add a new route for listing user notifications
+
+    });
+
+    Route::prefix('notification-message')->controller(\App\Http\Controllers\Api\V1\NotificationMessage\NotificationMessageController::class)->group(function () {
+        Route::get('list', 'list');
+        Route::get('{notificationMessage}', 'get');
+        Route::post('create', 'create');
     });
 });

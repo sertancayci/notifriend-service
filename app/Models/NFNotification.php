@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Notification extends Model
+class NFNotification extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use Filterable;
     use Sortable;
+
+    protected $table = 'notifications';
 
     protected $fillable = [
         'sender_user_id',
@@ -30,7 +32,7 @@ class Notification extends Model
 
     public function message()
     {
-        return $this->belongsTo(NotificationMessage::class);
+        return $this->belongsTo(NotificationMessage::class, 'message_id');
     }
 
 

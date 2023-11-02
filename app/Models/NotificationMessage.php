@@ -37,7 +37,7 @@ class NotificationMessage extends Model
 
     public function notification()
     {
-        return $this->hasMany(Notification::class);
+        return $this->hasMany(NFNotification::class);
     }
 
 }

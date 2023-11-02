@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Notification;
+use App\Models\NFNotification;
 use App\Models\NotificationMessage;
 use App\Models\UserChannels;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,7 +22,7 @@ class NotificationSeeder extends Seeder
             foreach ($notificationMessages as $message) {
                 // Check if the sender and receiver users have the same channel_id
                 if ($userChannel->channel_id == $message->channel_id) {
-                    Notification::create([
+                    NFNotification::create([
                         'sender_user_id' => $message->sender_user_id,
                         'receiver_user_id' => $userChannel->user_id,
                         'message_id' => $message->id,

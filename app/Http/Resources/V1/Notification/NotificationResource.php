@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\V1\Notification;
 
+use App\Http\Resources\V1\NotificationMessage\NotificationMessageResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,7 +15,7 @@ class NotificationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'sender_user_id' => $this->sender_user_id,
             'receiver_user_id' => $this->receiver_user_id,
@@ -25,5 +26,10 @@ class NotificationResource extends JsonResource
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
         ];
+
+        $data["message"] = NotificationMessageResource::collection($this->message()->get());
+
+
+        return $data;
     }
 }

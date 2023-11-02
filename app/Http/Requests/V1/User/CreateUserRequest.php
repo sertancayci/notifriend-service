@@ -36,7 +36,7 @@ class CreateUserRequest extends FormRequest
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'username' => 'required|string|max:255',
             'status' => 'required|in:ACTIVE,PASSIVE',
-            'token' => 'nullable||string|max:255',
+            'token' => 'nullable|string|max:255',
 
         ];
     }
