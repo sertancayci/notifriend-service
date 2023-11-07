@@ -9,16 +9,17 @@ use App\Http\Requests\V1\Channels\UpdateChannelRequest;
 use App\Http\Resources\V1\Channel\ChannelCollection;
 use App\Http\Resources\V1\Channel\ChannelResource;
 use App\Models\Channels;
+use Illuminate\Http\Request;
 
 class ChannelsController extends BaseController
 {
     //create basic controller for Channels
-    public function index()
+    public function list()
     {
-        return new ChannelCollection(Channels::paginate());
+        return new ChannelCollection(Channels::filter()->sort()->paginate());
     }
 
-    public function show(Channels $channel)
+    public function get(Channels $channel)
     {
         return new ChannelResource($channel);
     }
@@ -26,6 +27,21 @@ class ChannelsController extends BaseController
     public function create(CreateChannelRequest $request)
     {
         return new ChannelResource(Channels::create($request->all()));
+    }
+
+    public function userChannels(Request $request)
+    {
+        $user = $request->user();
+
+        $channels = Channels::where('user_id', $user->id)
+            ->with('message')
+            ->get();
+
+        if ($channels->isEmpty()) {
+            return response()->json(['message' => 'No channels found.'], 200);
+        }
+
+        return new ChannelCollection($channels);
     }
 
     public function update(Channels $channel, UpdateChannelRequest $request)

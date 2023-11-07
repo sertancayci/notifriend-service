@@ -47,6 +47,15 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1',
         Route::delete('{user}/delete', 'delete');
     });
 
+    Route::prefix('channel')->controller(ChannelsController::class)->group(function () {
+        Route::get('list', 'list');
+        Route::get('userChannels', 'userChannels');
+        Route::get('{channel}', 'get');
+        Route::post('create', 'create');
+        Route::post('{channel}/update', 'update');
+        Route::delete('{channel}/delete', 'delete');
+    });
+
     Route::prefix('notification')->controller(\App\Http\Controllers\Api\V1\Notifications\NotificationController::class)->group(function () {
         Route::get('list', 'list');
         Route::get('userNotifications', 'userNotifications');

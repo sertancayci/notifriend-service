@@ -29,7 +29,7 @@ class NotificationResource extends JsonResource
 
         $data["message"] = NotificationMessageResource::collection($this->message()->get());
 
-
+        
         return $data;
     }
 }
