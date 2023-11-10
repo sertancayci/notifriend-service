@@ -16,7 +16,9 @@ class ChannelsController extends BaseController
     //create basic controller for Channels
     public function list()
     {
-        return new ChannelCollection(Channels::filter()->sort()->paginate());
+        $perPage = request('perPage', 10);
+
+        return new ChannelCollection(Channels::filter()->sort()->paginate($perPage));
     }
 
     public function get(Channels $channel)

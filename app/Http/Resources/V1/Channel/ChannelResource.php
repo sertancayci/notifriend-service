@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\V1\Channel;
 
+use App\Http\Resources\V1\Category\CategoryCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,7 +15,7 @@ class ChannelResource extends JsonResource
      */
     public function toArray(Request $request)
     {
-        return [
+        $data = [
             'id' => $this->id,
             'user_id' => $this->user_id,
             'category_id' => $this->category_id,
@@ -25,5 +26,9 @@ class ChannelResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
+
+        $data["category"] = new CategoryCollection($this->category()->get());
+
+        return $data;
     }
 }
