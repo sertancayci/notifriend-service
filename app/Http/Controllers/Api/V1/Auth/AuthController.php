@@ -48,7 +48,17 @@ class AuthController extends BaseController
         //save token
 
 //        $token->save();
-        return new LoginResource($user);
+        $data = new LoginResource($user);
+
+        return $this->sendResponse($data, 'Login successful');
     }
 
+    public function sendResponse($data, $message): \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+            'data' => $data,
+        ]);
+    }
 }
