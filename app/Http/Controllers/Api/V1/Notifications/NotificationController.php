@@ -18,14 +18,6 @@ class NotificationController extends Controller
         $perPage = request('perPage', 10);
 
         return new NotificationCollection(NFNotification::filter()->sort()->paginate($perPage));
-//        $filter = new UserQuery();
-//        $queryItems = $filter->transform($request);
-//
-//        if (count($queryItems) == 0) {
-//            return UserCollection(User::paginate());
-//        } else {
-//            return UserCollection(User::where($queryItems)->paginate());
-//        }
     }
 
     public function get(NFNotification $notification)
