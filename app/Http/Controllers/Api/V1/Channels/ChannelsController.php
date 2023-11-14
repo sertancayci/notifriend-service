@@ -36,8 +36,27 @@ class ChannelsController extends BaseController
         $user = $request->user();
 
         $channels = Channels::where('user_id', $user->id)
-            ->with('message')
+            ->with('category')
+            ->sort()
             ->get();
+
+        if ($channels->isEmpty()) {
+            return response()->json(['message' => 'No channels found.'], 200);
+        }
+
+        return new ChannelCollection($channels);
+    }
+
+    public function privateChannels(Request $request)
+    {
+        $user = $request->user();
+        $perPage = request('perPage', 10);
+
+        $channels = Channels::where('user_id', $user->id)
+            ->where('category_id', 9)
+            ->with('category')
+            ->sort()
+            ->paginate($perPage);
 
         if ($channels->isEmpty()) {
             return response()->json(['message' => 'No channels found.'], 200);

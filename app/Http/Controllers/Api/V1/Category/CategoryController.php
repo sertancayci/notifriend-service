@@ -11,7 +11,7 @@ use App\Models\Category;
 class CategoryController extends BaseController
 {
     //create basic controller for Channels
-    public function index()
+    public function list()
     {
         return new CategoryCollection(Category::paginate());
     }

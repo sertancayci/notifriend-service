@@ -36,8 +36,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // api/v1
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1',
     'middleware' => ['auth:sanctum']], function () {
-    Route::apiResource('categories', CategoryController::class);
-    Route::apiResource('channels', ChannelsController::class);
 
     Route::prefix('user')->controller(\App\Http\Controllers\Api\V1\User\UserController::class)->group(function () {
         Route::get('list', 'list');
@@ -50,6 +48,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1',
     Route::prefix('channel')->controller(ChannelsController::class)->group(function () {
         Route::get('list', 'list');
         Route::get('userChannels', 'userChannels');
+        Route::get('privateChannels', 'privateChannels');
         Route::get('{channel}', 'get');
         Route::post('create', 'create');
         Route::post('{channel}/update', 'update');
@@ -71,4 +70,15 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1',
         Route::get('{notificationMessage}', 'get');
         Route::post('create', 'create');
     });
+});
+
+Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function () {
+
+    Route::prefix('category')->controller(CategoryController::class)->group(function () {
+        Route::get('list', 'list');
+        Route::get('{category}', 'get');
+        Route::post('{channel}/update', 'update');
+        Route::delete('{channel}/delete', 'delete');
+    });
+
 });
