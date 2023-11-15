@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Abbasudo\Purity\Traits\Filterable;
+use Abbasudo\Purity\Traits\Sortable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+    use Filterable;
+    use Sortable;
 
     const STATUS = [
         "ACTIVE" => "Aktif",

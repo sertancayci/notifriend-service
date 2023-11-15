@@ -13,7 +13,9 @@ class CategoryController extends BaseController
     //create basic controller for Channels
     public function list()
     {
-        return new CategoryCollection(Category::paginate());
+        $perPage = request('perPage', 10);
+
+        return new CategoryCollection(Category::filter()->sort()->paginate($perPage));
     }
 
     public function get(Category $category)
