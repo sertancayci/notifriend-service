@@ -20,6 +20,12 @@ class Category extends Model
     ];
 
     //TODO: add fillable
+    protected $fillable = [
+        'name',
+        'slug',
+        'status',
+        'thumbnail',
+    ];
 
     public function channels()
     {
