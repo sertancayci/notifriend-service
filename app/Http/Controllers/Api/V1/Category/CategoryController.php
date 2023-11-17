@@ -15,10 +15,10 @@ class CategoryController extends BaseController
     {
         $perPage = request('perPage', 10);
 
-        $data = new CategoryCollection(Category::filter()->sort()->paginate($perPage));
+        return new CategoryCollection(Category::filter()->sort()->paginate($perPage));
 
 
-        return $this->sendResponse($data, 'Categories retrieved successfully.');
+//        return $this->sendResponse($data, 'Categories retrieved successfully.');
 
     }
 

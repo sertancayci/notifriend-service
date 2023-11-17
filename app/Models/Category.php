@@ -25,6 +25,7 @@ class Category extends Model
         'slug',
         'status',
         'thumbnail',
+        'color',
     ];
 
     public function channels()
