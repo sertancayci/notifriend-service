@@ -14,11 +14,27 @@ use Illuminate\Http\Request;
 class ChannelsController extends BaseController
 {
     //create basic controller for Channels
+//    public function list()
+//    {
+//        $perPage = request('perPage', 10);
+//
+//        return new ChannelCollection(Channels::filter()->sort()->paginate($perPage));
+//    }
+
     public function list()
     {
         $perPage = request('perPage', 10);
+        $categoryId = request('categoryId');
 
-        return new ChannelCollection(Channels::filter()->sort()->paginate($perPage));
+        $channels = Channels::filter();
+
+        if ($categoryId !== null) {
+            $channels->where('category_id', $categoryId);
+        }
+
+        $result = $channels->sort()->paginate($perPage);
+
+        return new ChannelCollection($result);
     }
 
     public function get(Channels $channel)
