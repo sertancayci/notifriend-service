@@ -3,6 +3,7 @@
 namespace App\Http\Resources\V1\Channel;
 
 use App\Http\Resources\V1\Category\CategoryCollection;
+use App\Http\Resources\V1\User\UserCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -28,6 +29,7 @@ class ChannelResource extends JsonResource
         ];
 
         $data["category"] = new CategoryCollection($this->category()->get());
+        $data["owner"] = new UserCollection($this->owner()->get());
 
         return $data;
     }
