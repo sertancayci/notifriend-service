@@ -61,6 +61,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1',
         Route::get('{notification}', 'get');
         Route::post('create', 'create');
         Route::delete('{notification}/delete', 'delete');
+        Route::get('channelNotifications', 'channelNotifications');
         // Add a new route for listing user notifications
 
     });

@@ -45,6 +45,21 @@ class NotificationController extends Controller
         return new NotificationCollection($notifications);
     }
 
+    public function channelNotifications(Request $request)
+    {
+        $channelId = $request->channelId;
+
+        $notifications = NFNotification::where('channel_id', $channelId)
+            ->with('message')
+            ->get();
+
+        if ($notifications->isEmpty()) {
+            return response()->json(['message' => 'No notifications found.'], 200);
+        }
+
+        return new NotificationCollection($notifications);
+    }
+
     public function delete(NFNotification $notification)
     {
 
