@@ -3,6 +3,7 @@
 namespace App\Http\Resources\V1\Notification;
 
 use App\Http\Resources\V1\NotificationMessage\NotificationMessageResource;
+use App\Http\Resources\V1\User\UserCollection;
 use App\Models\NotificationMessage;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -31,7 +32,9 @@ class NotificationResource extends JsonResource
         $message = NotificationMessage::where('id', $this->message_id)->first();
 
         $data["message"] = new NotificationMessageResource($message);
-        
+
+        $data["sender"] = new UserCollection($this->sender()->get());
+
 //        $data["message"] = new NotificationMessageResource($this->message()->first());
 
 

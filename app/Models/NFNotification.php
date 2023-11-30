@@ -35,5 +35,10 @@ class NFNotification extends Model
         return $this->belongsTo(NotificationMessage::class, 'message_id');
     }
 
+    public function sender()
+    {
+        return $this->belongsTo(User::class, "sender_user_id");
+    }
+
 
 }
